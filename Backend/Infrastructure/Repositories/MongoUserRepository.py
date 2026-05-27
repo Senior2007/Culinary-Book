@@ -95,3 +95,6 @@ class MongoUserRepository(IUserRepository):
     async def get_all(self) -> List[User]:
         cursor = self.collection.find({}).sort("credentials.login", 1)
         return [self._build_user(user_data) async for user_data in cursor]
+
+    async def delete_user(self, user_id: UUID) -> None:
+        await self.collection.delete_one({"_id": str(user_id)})
