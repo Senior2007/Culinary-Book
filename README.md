@@ -115,6 +115,19 @@ Culinary-Book/
 
 См. `.env.example`.
 
+## Railway
+
+Railway деплоит этот проект через `Dockerfile`; `docker-compose.yml` используется только локально. Для production нужен отдельный MongoDB-сервис в Railway и переменная в сервисе приложения:
+
+| Переменная | Значение |
+|------------|----------|
+| `MONGODB_URL` | `${{MongoDB.MONGO_URL}}` |
+| `MONGODB_DATABASE` | `culinary_book` |
+| `SECRET_KEY` | длинная случайная строка |
+| `SEED_ON_STARTUP` | `true` для первого запуска, потом можно `false` |
+
+Healthcheck настроен на `/health`. Он не блокируется MongoDB, поэтому контейнер поднимается даже если БД временно недоступна; при этом для работы рецептов и пользователей `MONGODB_URL` всё равно должен вести на рабочую MongoDB.
+
 ## Локальная разработка без Docker (опционально)
 
 ```bash

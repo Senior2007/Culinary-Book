@@ -26,14 +26,17 @@ from fastapi.staticfiles import StaticFiles
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     from seed import ensure_admin_account
-    if os.getenv("SEED_ON_STARTUP", "true").lower() in ("1", "true", "yes"):
-        from seed import seed_database
-        seeded = await seed_database(db)
-        if seeded:
-            print("Database seeded with demo data.")
-    admin_created = await ensure_admin_account(db)
-    if admin_created:
-        print("Admin account created.")
+    try:
+        if os.getenv("SEED_ON_STARTUP", "true").lower() in ("1", "true", "yes"):
+            from seed import seed_database
+            seeded = await seed_database(db)
+            if seeded:
+                print("Database seeded with demo data.")
+        admin_created = await ensure_admin_account(db)
+        if admin_created:
+            print("Admin account created.")
+    except Exception as exc:
+        print(f"Database startup tasks skipped: {exc}")
     yield
 
 app = FastAPI(lifespan=lifespan)
@@ -47,8 +50,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# MongoDB client setup (override with MONGODB_URL if needed)
-mongo_client = AsyncIOMotorClient(os.getenv("MONGODB_URL", "mongodb://localhost:27017"))
+# MongoDB client setup (Railway commonly exposes MONGO_URL for MongoDB services)
+mongo_url = (
+    os.getenv("MONGODB_URL")
+    or os.getenv("MONGO_URL")
+    or "mongodb://localhost:27017"
+)
+mongo_client = AsyncIOMotorClient(
+    mongo_url,
+    serverSelectionTimeoutMS=int(os.getenv("MONGODB_SERVER_SELECTION_TIMEOUT_MS", "5000")),
+)
 db = mongo_client[os.getenv("MONGODB_DATABASE", "culinary_book")]
 
 # Repositories

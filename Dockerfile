@@ -9,9 +9,10 @@ COPY Backend/ Backend/
 COPY Frontend/ Frontend/
 
 ENV PYTHONPATH=/app/Backend/library/src
+ENV PYTHONUNBUFFERED=1
 ENV PORT=8000
 EXPOSE 8000
 
 WORKDIR /app/Backend
 
-CMD ["sh", "-c", "uvicorn endpoints:app --host 0.0.0.0 --port ${PORT:-8000}"]
+CMD ["sh", "-c", "exec uvicorn endpoints:app --host 0.0.0.0 --port ${PORT:-8000} --proxy-headers"]

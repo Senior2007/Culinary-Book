@@ -352,7 +352,15 @@ async def seed_database(db) -> bool:
 
 
 async def run_seed():
-    client = AsyncIOMotorClient(os.getenv("MONGODB_URL", "mongodb://localhost:27017"))
+    mongo_url = (
+        os.getenv("MONGODB_URL")
+        or os.getenv("MONGO_URL")
+        or "mongodb://localhost:27017"
+    )
+    client = AsyncIOMotorClient(
+        mongo_url,
+        serverSelectionTimeoutMS=int(os.getenv("MONGODB_SERVER_SELECTION_TIMEOUT_MS", "5000")),
+    )
     db = client[os.getenv("MONGODB_DATABASE", "culinary_book")]
     seeded = await seed_database(db)
     await ensure_admin_account(db)
