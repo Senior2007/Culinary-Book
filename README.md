@@ -38,27 +38,6 @@ docker compose down -v
 docker compose up --build
 ```
 
-## Деплой на Railway
-
-1. Создайте проект на [Railway](https://railway.app) и подключите репозиторий.
-2. Добавьте сервис **MongoDB** (Plugin) в проект.
-3. Добавьте сервис из **Dockerfile** (корень репозитория).
-4. В переменных окружения приложения укажите:
-
-| Переменная | Значение |
-|------------|----------|
-| `MONGODB_URL` | URL из MongoDB-плагина (например `${{MongoDB.MONGO_URL}}`) |
-| `MONGODB_DATABASE` | `culinary_book` |
-| `SECRET_KEY` | длинная случайная строка |
-| `SEED_ON_STARTUP` | `true` (только для первого деплоя) |
-| `PORT` | Railway подставит сам |
-
-5. После первого успешного деплоя с данными можно поставить `SEED_ON_STARTUP=false`.
-
-Файл `railway.toml` уже настроен на сборку через Dockerfile и healthcheck `/health`.
-
-> **Важно:** на Railway один контейнер отдаёт и API, и фронтенд (статика через FastAPI). Отдельно запускать `scripts/` не нужно.
-
 ## Архитектура
 
 ```
