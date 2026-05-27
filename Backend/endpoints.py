@@ -615,6 +615,38 @@ async def admin_unban_user(user_id: UUID, current_user=Depends(require_admin)):
     return {"status": "User unbanned"}
 
 
+@app.delete("/users/{user_id}")
+async def delete_user(user_id: UUID, current_user: UUID = Depends(get_current_user)):
+    requester = await user_repo.get_by_id(current_user)
+    if not requester:
+        raise HTTPException(status_code=401, detail="User not found")
+    is_admin = requester.credentials.is_admin
+    is_self = current_user == user_id
+    if not is_admin and not is_self:
+        raise HTTPException(status_code=403, detail="You can only delete your own account")
+
+    target = await user_repo.get_by_id(user_id)
+    if not target:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    # Delete all recipes authored by the user (and their comments)
+    recipes = await recipe_repo.find_by_author(user_id)
+    for recipe in recipes:
+        await comment_repo.delete_by_recipe(recipe.id)
+        await recipe_repo.delete_recipe(recipe.id)
+
+    # Delete all comments left by the user
+    await comment_repo.delete_by_user(user_id)
+
+    # Delete the user's rating entry
+    await rating_repo.collection.delete_one({"_id": str(user_id)})
+
+    # Delete the user
+    await user_repo.delete_user(user_id)
+
+    return {"status": "User deleted"}
+
+
 @app.get("/admin/comments")
 async def admin_list_comments(current_user=Depends(require_admin)):
     comments = await comment_repo.get_all()

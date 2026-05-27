@@ -54,3 +54,6 @@ class MongoCommentRepository(ICommentRepository):
 
     async def delete_by_recipe(self, recipe_id: UUID) -> None:
         await self.collection.delete_many({"recipe_id": str(recipe_id)})
+
+    async def delete_by_user(self, user_id: UUID) -> None:
+        await self.collection.delete_many({"user_id": str(user_id)})
