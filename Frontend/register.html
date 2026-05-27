@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация — Culinary Book</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="site-header__inner">
+            <a href="/index.html" class="site-logo">Culinary Book</a>
+            <nav class="site-nav" id="site-nav"></nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="card form-card">
+            <h1 class="section-title text-center">Создать аккаунт</h1>
+            <div id="register-alert" class="alert alert-error hidden"></div>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="login">Имя пользователя</label>
+                    <input type="text" id="login" name="login" required minlength="3" autocomplete="username">
+                    <p class="form-hint">Минимум 3 символа</p>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com">
+                    <p class="form-hint">Будет виден в вашем профиле</p>
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" name="password" required autocomplete="new-password">
+                    <div class="strength-meter" id="strength-meter">
+                        <div class="strength-meter__bar"></div>
+                    </div>
+                    <p class="form-hint" id="strength-hint">Мин. 8 символов, заглавная, строчная буква и цифра</p>
+                </div>
+                <div class="form-group">
+                    <label for="password-confirm">Подтверждение пароля</label>
+                    <input type="password" id="password-confirm" required autocomplete="new-password">
+                    <p class="form-error hidden" id="confirm-error">Пароли не совпадают</p>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%">Зарегистрироваться</button>
+            </form>
+            <p class="text-center mt-1 text-muted">Уже есть аккаунт? <a href="/login.html">Войти</a></p>
+        </div>
+    </main>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+    <script src="register.js"></script>
+</body>
+</html>

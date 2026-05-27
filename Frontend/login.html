@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход — Culinary Book</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="site-header__inner">
+            <a href="/index.html" class="site-logo">Culinary Book</a>
+            <nav class="site-nav" id="site-nav"></nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="card form-card">
+            <h1 class="section-title text-center">Вход</h1>
+            <div id="login-alert" class="alert alert-error hidden"></div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login">Имя пользователя</label>
+                    <input type="text" id="login" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%">Войти</button>
+            </form>
+            <p class="text-center mt-1 text-muted">
+                Нет аккаунта? <a href="/register.html">Зарегистрироваться</a>
+            </p>
+        </div>
+    </main>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+    <script src="login.js"></script>
+</body>
+</html>

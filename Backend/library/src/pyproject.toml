@@ -1,0 +1,15 @@
+[project]
+name = "cookbook-lib"
+version = "0.1.0"
+description = "Reusable Domain and Application logic for the cookbook project"
+authors = [{ name="gerinos", email="denmogilevec@gmail.com" }]
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["Domain*", "Application*"]

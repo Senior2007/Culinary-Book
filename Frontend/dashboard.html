@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет — Culinary Book</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="site-header__inner">
+            <a href="/index.html" class="site-logo">Culinary Book</a>
+            <nav class="site-nav" id="site-nav"></nav>
+            <span id="user-rating-badge" class="user-badge hidden"></span>
+        </div>
+    </header>
+
+    <main>
+        <h1 class="section-title">Личный кабинет</h1>
+
+        <section class="card">
+            <div class="btn-group mb-0">
+                <button type="button" class="btn btn-primary" id="create-recipe-btn">+ Новый рецепт</button>
+                <button type="button" class="btn btn-secondary" id="view-missing-ingredients-btn">Недостающие продукты</button>
+            </div>
+        </section>
+
+        <section class="card" id="my-recipes-section">
+            <h2 class="section-title">Мои рецепты</h2>
+            <p class="text-muted mb-0">Создавайте, редактируйте и удаляйте свои рецепты.</p>
+            <ul id="my-recipes-list" class="recipe-list mt-1"></ul>
+            <p id="my-recipes-empty" class="text-muted hidden">У вас пока нет рецептов.</p>
+        </section>
+
+        <section class="card" id="my-recipe-book">
+            <h2 class="section-title">Моя книга рецептов</h2>
+            <p class="text-muted mb-0">Рецепты, которые вы сохранили для готовки.</p>
+            <ul id="book-recipes-list" class="recipe-list mt-1"></ul>
+            <p id="book-recipes-empty" class="text-muted hidden">Книга пуста — добавьте рецепты с главной.</p>
+        </section>
+    </main>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

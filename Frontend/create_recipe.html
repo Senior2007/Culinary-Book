@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактор рецепта — Culinary Book</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="site-header__inner">
+            <a href="/index.html" class="site-logo">Culinary Book</a>
+            <nav class="site-nav" id="site-nav"></nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="card">
+            <h1 class="section-title" id="page-title">Новый рецепт</h1>
+            <p id="published-notice" class="alert alert-success hidden">Рецепт опубликован. Редактирование отключено, но удалить можно из кабинета.</p>
+
+            <form id="create-recipe-form">
+                <div class="form-group">
+                    <label for="title">Название</label>
+                    <input type="text" id="title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cover-url">Финальная картинка (обложка)</label>
+                    <input type="url" id="cover-url" placeholder="https://…">
+                    <p class="form-hint">Эта картинка будет использоваться как превью рецепта на главной.</p>
+                </div>
+
+                <h3>Ингредиенты</h3>
+                <div class="search-bar">
+                    <input type="text" id="ingredient" placeholder="Название ингредиента">
+                    <button type="button" class="btn btn-secondary" id="add-ingredient">Добавить</button>
+                </div>
+                <ul id="ingredients-list" class="editor-list"></ul>
+
+                <h3>Шаги</h3>
+                <div class="form-group">
+                    <textarea id="step-description" rows="2" placeholder="Описание шага"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="step-image">URL фото к шагу (необязательно)</label>
+                    <input type="url" id="step-image" placeholder="https://…">
+                </div>
+                <button type="button" class="btn btn-secondary" id="add-step">Добавить шаг</button>
+                <ol id="steps-list" class="editor-list"></ol>
+
+                <h3>Теги</h3>
+                <div class="search-bar">
+                    <input type="text" id="tag" placeholder="Тег">
+                    <button type="button" class="btn btn-secondary" id="add-tag">Добавить</button>
+                </div>
+                <ul id="tags-list" class="editor-list"></ul>
+
+                <div class="btn-group mt-1">
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <button type="button" class="btn btn-secondary" id="publish-recipe">Опубликовать</button>
+                    <button type="button" class="btn btn-danger" id="delete-recipe">Удалить рецепт</button>
+                    <a href="/dashboard.html" class="btn btn-secondary">← Кабинет</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+    <script src="create_recipe.js"></script>
+</body>
+</html>

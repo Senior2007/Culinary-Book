@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Недостающие продукты — Culinary Book</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="site-header__inner">
+            <a href="/index.html" class="site-logo">Culinary Book</a>
+            <nav class="site-nav" id="site-nav"></nav>
+        </div>
+    </header>
+    <main>
+        <section class="card">
+            <h1 class="section-title">Недостающие продукты</h1>
+            <button type="button" class="btn btn-secondary" id="refresh-btn">Обновить</button>
+            <ul id="missing-ingredients-list" class="recipe-list mt-1"></ul>
+            <p id="missing-empty" class="text-muted hidden">Всё есть — ничего не отмечено как недостающее.</p>
+        </section>
+    </main>
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+    <script src="missing_ingridients.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Culinary Book — рецепты</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="site-header__inner">
+            <a href="/index.html" class="site-logo">Culinary Book</a>
+            <nav class="site-nav" id="site-nav"></nav>
+            <span id="user-rating-badge" class="user-badge hidden"></span>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Откройте мир вкусных рецептов</h1>
+            <p>Создавайте свои блюда, сохраняйте чужие в книгу и делитесь впечатлениями в комментариях.</p>
+        </section>
+
+        <section class="card">
+            <h2 class="section-title">Поиск рецептов</h2>
+            <div class="search-bar">
+                <input type="text" id="search-bar" placeholder="Название рецепта…">
+                <select id="tag-dropdown">
+                    <option value="none">Все теги</option>
+                </select>
+                <button type="button" class="btn btn-primary" onclick="searchRecipes()">Найти</button>
+            </div>
+        </section>
+
+        <section id="search-results-section" class="hidden">
+            <h2 class="section-title">Результаты поиска</h2>
+            <div id="search-results" class="recipe-grid"></div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Опубликованные рецепты</h2>
+            <div id="all-recipes-container" class="recipe-grid"></div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>Culinary Book — учебный проект ООП</p>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

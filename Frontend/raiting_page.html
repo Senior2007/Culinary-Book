@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рейтинг — Culinary Book</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="site-header__inner">
+            <a href="/index.html" class="site-logo">Culinary Book</a>
+            <nav class="site-nav" id="site-nav"></nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="card">
+            <h1 class="section-title">Рейтинг пользователей</h1>
+            <ol id="ratings-container" class="ratings-list"></ol>
+        </section>
+    </main>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+    <script>
+        async function loadSortedRatings() {
+            const container = document.getElementById("ratings-container");
+            try {
+                const response = await fetch(`${API_BASE}/ratings`);
+                const data = await response.json();
+                container.innerHTML = "";
+                data.ratings.forEach((user) => {
+                    const li = document.createElement("li");
+                    li.innerHTML = `
+                        <div>
+                            <a href="/profile.html?id=${user.user_id}"><strong>${user.login}</strong></a>
+                            <div class="text-muted" style="font-size:0.85rem">${user.email}</div>
+                        </div>
+                        <span class="ratings-list__score">${user.rating} ★</span>
+                    `;
+                    container.appendChild(li);
+                });
+            } catch (error) {
+                container.innerHTML = '<p class="text-muted">Не удалось загрузить рейтинг.</p>';
+            }
+        }
+        document.addEventListener("DOMContentLoaded", loadSortedRatings);
+    </script>
+</body>
+</html>

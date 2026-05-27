@@ -1,0 +1,29 @@
+services:
+  mongodb:
+    image: mongo:7
+    container_name: culinary-book-mongo
+    volumes:
+      - culinary_book_mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build: .
+    container_name: culinary-book-app
+    ports:
+      - "${APP_PORT:-8080}:8000"
+    environment:
+      MONGODB_URL: mongodb://mongodb:27017
+      MONGODB_DATABASE: culinary_book
+      SEED_ON_STARTUP: "true"
+      SECRET_KEY: ${SECRET_KEY:-change-me-in-production}
+      PORT: "8000"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+
+volumes:
+  culinary_book_mongo_data:
